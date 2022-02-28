@@ -28,7 +28,7 @@ class Book
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="relation")
+     * @ORM\ManyToOne(targetEntity=CategoryBook::class, inversedBy="relation")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category_id;
