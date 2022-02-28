@@ -68,12 +68,12 @@ class Book
         return $this;
     }
 
-    public function getCategoryId(): ?Category
+    public function getCategoryId(): ?CategoryBook
     {
         return $this->category_id;
     }
 
-    public function setCategoryId(?Category $category_id): self
+    public function setCategoryId(?CategoryBook $category_id): self
     {
         $this->category_id = $category_id;
 
