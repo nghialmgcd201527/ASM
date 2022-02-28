@@ -29,4 +29,24 @@ class BookController extends AbstractController
             'book' => $books,
         ]);
     }
+
+    /**
+     * @Route("/book/delete/{id}", name="book_delete")
+     */
+    public function deleteBookById($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $bookRepo = $em->getRepository(Book::class);
+        $book = $bookRepo->find($id);
+        $em->remove($book);
+        $em->flush();
+
+        $this->addFlash(
+            'error',
+            'Todo deleted'
+        );
+
+        return $this->redirectToRoute('book_show');
+
+    }
 }
