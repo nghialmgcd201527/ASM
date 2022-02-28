@@ -21,11 +21,11 @@ class CategoryBookController extends AbstractController
     }
 
     /**
-     * @Route("/category/{id}", name="book_detail")
+     * @Route("/category/{id}", name="category_detail")
      */
     public function detail(CategoryBook $categories): Response
     {
-        return $this->render('category_book/detail.html.twig', [
+        return $this->render('category_book/category_detail.html.twig', [
             'category_book' => $categories,
         ]);
     }
