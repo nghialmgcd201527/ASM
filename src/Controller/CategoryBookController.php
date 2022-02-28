@@ -26,7 +26,7 @@ class CategoryBookController extends AbstractController
     public function detail(CategoryBook $categories): Response
     {
         return $this->render('category_book/category_detail.html.twig', [
-            'category_book' => $categories,
+            'category' => $categories,
         ]);
     }
 }
