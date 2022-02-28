@@ -20,7 +20,7 @@ class Book
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $book_name;
+    public $book_name;
 
     /**
      * @ORM\Column(type="string", length=255)
