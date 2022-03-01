@@ -80,4 +80,9 @@ class CategoryBook
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->getId();  // or some string field in your Vegetal Entity
+    }
 }

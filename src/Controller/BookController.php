@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Book;
 use App\Form\BookType;
 use App\Repository\BookRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,45 +58,46 @@ class BookController extends AbstractController
     /**
      * @Route("/book/edit/{id}", name="book_edit")
      */
-    public function editBook($id, Request $request)
+    public function editBook(Request $request, Book $book, EntityManagerInterface $entityManager): Response
     {
-        $em = $this->getDoctrine()->getManager();
-        $bookRepo = $em->getRepository(Book::class);
-        $book = $bookRepo->find($id);
-
         $form = $this->createForm(BookType::class, $book);
-
-        if ($this->saveChanges($form, $request, $book)) {
-            $this->addFlash(
-                'notice',
-                'Book Edited'
-            );
-            return $this->redirectToRoute('book_show');
-        }
-
-        return $this->render('book/edit.html.twig', [
-            'form' => $form->createView()
-        ]);
-
-    }
-
-    public function saveChanges($form, $request, $book)
-    {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $book->setBookName($request->request->get('book')['book_name']);
-            $book->setDescription($request->request->get('book')['description']);
-            $book->setCategoryId($request->request->get('book')['category_id']);
-            $book->setAuthorId($request->request->get('book')['author_id']);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($book);
-            $em->flush();
+            $entityManager->flush();
 
-            return true;
+            return $this->redirectToRoute('book_show', [], Response::HTTP_SEE_OTHER);
         }
-        return false;
+
+        return $this->renderForm('book/edit.html.twig', [
+            'book' => $book,
+            'form' => $form,
+        ]);
     }
 
+    /**
+     * @Route("/book/create", name="book_create", methods={"GET","POST"})
+     */
+    public function bookCreate(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $book = new Book();
+        $form = $this->createForm(BookType::class, $book);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $book->setCategoryId($request->request->get('book')['category_id']);
+            $book->setAuthorId($request->request->get('book')['author_id']);
+            $book->setBookName($request->request->get('book')['book_name']);
+            $book->setDescription($request->request->get('book')['description']);
+            $entityManager->persist($book);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('book');
+        }
+
+        return $this->renderForm('book/create.html.twig', [
+            'book' => $book,
+            'form' => $form,
+        ]);
+    }
 }
