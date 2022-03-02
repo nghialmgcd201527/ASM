@@ -73,4 +73,26 @@ class CategoryBookController extends AbstractController
             'form' => $form,
         ]);
     }
+    /**
+     * @Route("/category/create", name="create_category", methods={"GET","POST"})
+     */
+    public function bookCreate(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $category = new CategoryBook();
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $category->setCategoryName($request->request->get('category')['category_name']);
+            $entityManager->persist($category);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('category');
+        }
+
+        return $this->renderForm('category_book/category_create.html.twig', [
+            'category' => $category,
+            'form' => $form,
+        ]);
+    }
 }
