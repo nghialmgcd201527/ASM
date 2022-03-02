@@ -12,7 +12,7 @@
                 <hr>
                 <b>Description: </b>{{ book.description }}
                 <form class="mt-4 p-4 bg-light" method="post">
-                    <button class="btn btn-warning">Edit</button>
+                    <a href="{{ path('book_edit', {'id':book.id}) }}" class="btn" style="background-color: yellow; color: black">Edit details</a>
                 </form>
             </div>
         </div>
