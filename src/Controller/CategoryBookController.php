@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Book;
 use App\Entity\CategoryBook;
+use App\Form\BookType;
 use App\Repository\CategoryBookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,4 +31,26 @@ class CategoryBookController extends AbstractController
             'category' => $categories,
         ]);
     }
+
+    /**
+     * @Route("/category/delete/{id}", name="category_delete")
+     */
+    public function deleteCategoryById($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $categoryBookRepo = $em->getRepository(CategoryBook::class);
+        $category = $categoryBookRepo->find($id);
+        dump($category);
+        $em->remove($category);
+        $em->flush();
+
+        $this->addFlash(
+            'error',
+            'Todo deleted'
+        );
+
+        return $this->redirectToRoute('list_category');
+
+    }
+
 }
