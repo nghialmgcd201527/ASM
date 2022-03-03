@@ -24,6 +24,28 @@ class BookController extends AbstractController
     }
 
     /**
+     * @Route("/book/create", name="book_create", methods={"GET","POST"})
+     */
+    public function bookCreate(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $book = new Book();
+        $form = $this->createForm(BookType::class, $book);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($book);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('book_show', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('book/create.html.twig', [
+            'book' => $book,
+            'form' => $form,
+        ]);
+    }
+
+    /**
      * @Route("/book/{id}", name="book_detail")
      */
     public function detail(Book $books): Response
@@ -42,7 +64,6 @@ class BookController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $bookRepo = $em->getRepository(Book::class);
         $book = $bookRepo->find($id);
-        dump($book);
         $em->remove($book);
         $em->flush();
 
@@ -75,29 +96,5 @@ class BookController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/book/create", name="book_create", methods={"GET","POST"})
-     */
-    public function bookCreate(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $book = new Book();
-        $form = $this->createForm(BookType::class, $book);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $book->setCategoryId($request->request->get('book')['category_id']);
-            $book->setAuthorId($request->request->get('book')['author_id']);
-            $book->setBookName($request->request->get('book')['book_name']);
-            $book->setDescription($request->request->get('book')['description']);
-            $entityManager->persist($book);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('book');
-        }
-
-        return $this->renderForm('book/create.html.twig', [
-            'book' => $book,
-            'form' => $form,
-        ]);
-    }
 }
