@@ -8,11 +8,10 @@
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h5 class="card-title">{{ author.author_name }}</h5>
+                            <h5 class="card-title">{{ author.full_name }}</h5>
                             <div class="d-flex justify-content-between align-item-center">
                                 <a href="{{ path('author_detail', {'id':author.id}) }}" class="btn btn-dark">View details</a>
-                                <a href="{{ path('author_delete', {'id':author.id}) }}" class="btn" style="background-color: red; color: white">Delete</a>
-                                <a href="{{ path('author_edit', {'id':author.id}) }}" class="btn" style="background-color: green; color: white">Edit details</a>
+
                             </div>
                         </div>
                     </div>
@@ -22,7 +21,7 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-item-center">
-                            <a href="{{ path('author_create') }}" class="btn btn-warning">Add new</a>
+                            <a href="{{ path('create_author') }}" class="btn btn-warning">Add new</a>
                         </div>
                     </div>
                 </div>
