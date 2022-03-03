@@ -17,12 +17,12 @@ class CategoryBook
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    public $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $category_name;
+    public $category_name;
 
     /**
      * @ORM\OneToMany(targetEntity=Book::class, mappedBy="category_id")
@@ -79,5 +79,10 @@ class CategoryBook
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getId();  // or some string field in your Vegetal Entity
     }
 }
