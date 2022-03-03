@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CategoryBook
 {
+    protected $books;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

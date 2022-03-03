@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CategoryBookController extends AbstractController
 {
+
     /**
      * @Route("/category", name="list_category")
      */
