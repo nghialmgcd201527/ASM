@@ -76,7 +76,7 @@ class CategoryBookController extends AbstractController
         ]);
     }
     /**
-     * @Route("/category/create", name="create_category", methods={"GET","POST"})
+     * @Route("/category_create", name="create_category", methods={"GET","POST"})
      */
     public function bookCreate(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -89,7 +89,7 @@ class CategoryBookController extends AbstractController
             $entityManager->persist($category);
             $entityManager->flush();
 
-            return $this->redirectToRoute('category');
+            return $this->redirectToRoute('list_category');
         }
 
         return $this->renderForm('category_book/category_create.html.twig', [
