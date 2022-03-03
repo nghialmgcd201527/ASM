@@ -117,6 +117,6 @@ class Author
 
     public function __toString(): string
     {
-        return $this->getId();  // or some string field in your Vegetal Entity
+        return $this->getFullName();  // or some string field in your Vegetal Entity
     }
 }
