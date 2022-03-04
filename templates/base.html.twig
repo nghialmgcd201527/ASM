@@ -14,9 +14,7 @@
 <body>
 {% block header %}
 <nav class="navbar navbar-dark bg-dark sticky-top">
-    <a href="{{ path('book_show') }}" class="navbar-brand">
-        TAN LIBRARY
-    </a>
+    <span class="navbar-brand">TANNAT Bookstore </span>
 
     {% if app.user %}
         <a href="{{ path('book_show') }}" class="navbar-brand">
@@ -25,11 +23,11 @@
         <a href="{{ path('list_category') }}" class="navbar-brand">
             Category list
         </a>
-        <a href="{{ path('list_category') }}" class="navbar-brand">
+        <a href="{{ path('author_show') }}" class="navbar-brand">
+                    Author
+                </a>
+        <a href="{{ path('aboutus') }}" class="navbar-brand">
             About Us
-        </a>
-        <a href="{{ path('list_category') }}" class="navbar-brand">
-            Contact Us
         </a>
         <a class="nav-link" href="{{ path('user show', {'id':app.user.id}) }}">
         Your Profile

@@ -17,6 +17,7 @@
                     </div>
                 </div>
             {% endfor %}
+            {% if is_granted('ROLE_ADMIN') %}
             <div class="col-md-4">
                 <div class="card mb-4">
                     <div class="card-body">
@@ -26,6 +27,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

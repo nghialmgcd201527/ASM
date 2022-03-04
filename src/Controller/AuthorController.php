@@ -26,9 +26,8 @@ class AuthorController extends AbstractController
      */
     public function detail(Author $authors): Response
     {
-        dump($authors);
-        return $this->render('author/author_detail.html.twig', [
-            'author' => $authors,
+        return $this->render('author/index.html.twig', [
+            'authors' => $authors,
         ]);
     }
     /**
@@ -52,43 +51,5 @@ class AuthorController extends AbstractController
             'form' => $form,
         ]);
     }
-    /**
-     * @Route("/author/author_delete/{id}", name="author_delete")
-     */
-    public function deleteAuthorById($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $authorRepo = $em->getRepository(Author::class);
-        $author = $authorRepo->find($id);
-        $em->remove($author);
-        $em->flush();
 
-        $this->addFlash(
-            'error',
-            'Todo deleted'
-        );
-
-        return $this->redirectToRoute('author_show');
-
-    }
-
-    /**
-     * @Route("/author/author_edit/{id}", name="author_edit")
-     */
-    public function editAuthor(Request $request, Author $author, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(AuthorType::class, $author);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('author_show', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('author/author_edit.html.twig', [
-            'author' => $author,
-            'form' => $form,
-        ]);
-    }
 }

@@ -11,12 +11,13 @@
                             <h5 class="card-title">{{ author.full_name }}</h5>
                             <div class="d-flex justify-content-between align-item-center">
                                 <a href="{{ path('author_detail', {'id':author.id}) }}" class="btn btn-dark">View details</a>
-                                <a href="{{ path('author_delete', {'id':author.id}) }}" class="btn" style="background-color: red; color: white">Delete</a>
+                                <a href="#" class="btn" style="background-color: red; color: white">Delete</a>
                             </div>
                         </div>
                     </div>
                 </div>
             {% endfor %}
+            {% if is_granted('ROLE_ADMIN') %}
             <div class="col-md-4">
                 <div class="card mb-4">
                     <div class="card-body">
@@ -26,6 +27,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

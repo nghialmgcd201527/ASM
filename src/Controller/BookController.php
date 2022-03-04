@@ -6,6 +6,7 @@ use App\Entity\Book;
 use App\Form\BookType;
 use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -88,6 +89,7 @@ class BookController extends AbstractController
 
     /**
      * @Route("/book/edit/{id}", name="book_edit")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function editBook(Request $request, Book $book, EntityManagerInterface $entityManager): Response
     {
