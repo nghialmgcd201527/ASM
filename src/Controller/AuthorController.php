@@ -30,4 +30,26 @@ class AuthorController extends AbstractController
             'author' => $authors,
         ]);
     }
+    /**
+     * @Route("/author/author_create", name="author_create", methods={"GET","POST"})
+     */
+    public function authorCreate(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $author = new Author();
+        $form = $this->createForm(AuthorType::class, $author);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($author);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('author_show', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('author/author_create.html.twig', [
+            'author' => $author,
+            'form' => $form,
+        ]);
+    }
+
 }
