@@ -11,7 +11,6 @@
                             <h5 class="card-title">{{ author.full_name }}</h5>
                             <div class="d-flex justify-content-between align-item-center">
                                 <a href="{{ path('author_detail', {'id':author.id}) }}" class="btn btn-dark">View details</a>
-
                             </div>
                         </div>
                     </div>
@@ -21,7 +20,7 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-item-center">
-                            <a href="{{ path('create_author') }}" class="btn btn-warning">Add new</a>
+                            <a href="{{ path('author_create') }}" class="btn btn-warning">Add new</a>
                         </div>
                     </div>
                 </div>
