@@ -14,14 +14,31 @@
 {% block header %}
 <nav class="navbar navbar-dark bg-dark sticky-top">
     <a href="{{ path('book_show') }}" class="navbar-brand">
-        Happy Shop
+        TAN LIBRARY
     </a>
-    <a href="{{ path('book_show') }}" class="navbar-brand">
-        Book list
-    </a>
-    <a href="{{ path('list_category') }}" class="navbar-brand">
-        Category list
-    </a>
+
+    {% if app.user %}
+        <a href="{{ path('book_show') }}" class="navbar-brand">
+            Book list
+        </a>
+        <a href="{{ path('list_category') }}" class="navbar-brand">
+            Category list
+        </a>
+        <a href="{{ path('list_category') }}" class="navbar-brand">
+            About Us
+        </a>
+        <a href="{{ path('list_category') }}" class="navbar-brand">
+            Contact Us
+        </a>
+        <a class="nav-link" href="{{ path('app_logout') }}">
+                Logout</a>
+    {% else %}
+        <li><a class="nav-link" href="{{ path('app_login') }}">Login</a></li>
+        <li>
+            <a class="nav-link" href="{{ path('registration') }}">Register</a>
+        </li>
+    {% endif %}
+    </ul>
 </nav>
 {% endblock %}
 {% block body %}{% endblock %}
