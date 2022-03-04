@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ form_start(form) }}
+    <div class="form-group">
+        <label for="author_name">Name:</label>
+        {{ form_widget(form.author_name) }}
+    </div>
+    <input type="submit" name="create_author" value="Create" class="btn btn-primary"/>
+    {{ form_end(form) }}
+{% endblock %}
