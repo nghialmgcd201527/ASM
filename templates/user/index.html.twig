@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Profile</h1>
+
+    <table>
+        <tbody>
+        <tr>
+            <th>Name</th>
+            <td>{{ userInfor.name }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ userInfor.email }}</td>
+        </tr>
+        <tr>
+            <th>Phone number</th>
+            <td>{{ userInfor.phonenumber }}</td>
+        </tr>
+        <tr>
+            <th>Gender</th>
+            <td>{{ userInfor.gender }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('book_show') }}">Back to the book list</a>
+        </li>
+    </ul>
+{% endblock %}
