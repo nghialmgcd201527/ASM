@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ author.autor_name }}{% endblock %}
+{% block title %}{{ author.full_name }}{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -8,10 +8,12 @@
             <div class="col-md-4">
             </div>
             <div class="col-md-8">
-                <h1 class="mt-4 mt-md-0">{{ author.author_name }}</h1>
+                <h1 class="mt-4 mt-md-0">{{ author.full_name }}</h1>
                 <hr>
+                <b>Nationality: </b>{{ author.nationality }}
+                <b>Gender: </b>{{ author.gender }}
                 <form class="mt-4 p-4 bg-light" method="post">
-                    <button class="btn btn-warning">Edit</button>
+                    <a href="{{ path('author_edit', {'id':author.id}) }}" class="btn" style="background-color: yellow; color: black">Edit details</a>
                 </form>
             </div>
         </div>

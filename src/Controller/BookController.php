@@ -25,6 +25,16 @@ class BookController extends AbstractController
     }
 
     /**
+     * @Route("/welcome", name="welcome")
+     */
+    public function welcome(BookRepository $bookRepository): Response
+    {
+        return $this->render('book/index_customer.html.twig', [
+            'books' => $bookRepository->findAll(),
+        ]);
+    }
+
+    /**
      * @Route("/book/create", name="book_create", methods={"GET","POST"})
      */
     public function bookCreate(Request $request, EntityManagerInterface $entityManager): Response
