@@ -27,7 +27,7 @@ class AuthorController extends AbstractController
     public function detail(Author $authors): Response
     {
         return $this->render('author/index.html.twig', [
-            'author' => $authors,
+            'authors' => $authors,
         ]);
     }
     /**
