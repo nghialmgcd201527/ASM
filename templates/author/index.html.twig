@@ -11,6 +11,7 @@
                             <h5 class="card-title">{{ author.full_name }}</h5>
                             <div class="d-flex justify-content-between align-item-center">
                                 <a href="{{ path('author_detail', {'id':author.id}) }}" class="btn btn-dark">View details</a>
+                                <a href="{{ path('author_delete', {'id':author.id}) }}" class="btn" style="background-color: red; color: white">Delete</a>
                             </div>
                         </div>
                     </div>
