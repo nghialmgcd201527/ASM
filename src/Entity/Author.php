@@ -17,27 +17,27 @@ class Author
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    public $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $full_name;
+    public $full_name;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nationality;
+    public $nationality;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $gender;
+    public $gender;
 
     /**
      * @ORM\OneToMany(targetEntity=Book::class, mappedBy="author_id")
      */
-    private $relation;
+    public $relation;
 
     public function __construct()
     {
