@@ -30,8 +30,12 @@
         <a href="{{ path('list_category') }}" class="navbar-brand">
             Contact Us
         </a>
+        <a class="nav-link" href="{{ path('user show', {'id':app.user.id}) }}">
+        Your Profile
+        </a>
         <a class="nav-link" href="{{ path('app_logout') }}">
-                Logout</a>
+                Logout
+        </a>
     {% else %}
         <li><a class="nav-link" href="{{ path('app_login') }}">Login</a></li>
         <li>
