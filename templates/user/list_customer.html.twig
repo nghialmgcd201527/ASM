@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class = "header" style="display: flex">
+            <h1 class="mt-3 mb-4" style="margin-right: 50px">Books</h1>
+        </div>
+        <div class="row">
+            {% for customer in customers %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <p class="card-text">Email: {{ customer.email }}</p>
+                            <p class="card-text">Encoded password: {{ customer.password }}</p>
+                            <p class="card-text">Name: {{ customer.name }}</p>
+                            <p class="card-text">Phone number: {{ customer.phonenumber }}</p>
+                            <p class="card-text">Gender: {{ customer.gender }}</p>
+                            <div class="d-flex justify-content-between align-item-center">
+                                                            <a href="#" class="btn" style="background-color: red; color: white">Delete</a>
+                                                        </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

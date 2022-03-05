@@ -21,10 +21,11 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <h5 class="card-title">{{ book.book_name }}</h5>
-                            <p class="card-text">{{ book.description }}</p>
                             <div class="d-flex justify-content-between align-item-center">
                                 <a href="{{ path('book_detail', {'id':book.id}) }}" class="btn btn-dark">View details</a>
+                                {% if is_granted('ROLE_ADMIN') %}
                                 <a href="{{ path('book_delete', {'id':book.id}) }}" class="btn" style="background-color: red; color: white">Delete</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
