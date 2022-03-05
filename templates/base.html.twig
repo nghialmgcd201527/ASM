@@ -29,9 +29,11 @@
         <a href="{{ path('aboutus') }}" class="navbar-brand">
                     About Us
         </a>
+        {% if is_granted('ROLE_ADMIN') %}
         <a href="{{ path('account') }}" class="navbar-brand">
             Customer
         </a>
+        {% endif %}
         <a class="nav-link" href="{{ path('user show', {'id':app.user.id}) }}">
         Your Profile
         </a>

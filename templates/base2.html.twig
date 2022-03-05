@@ -26,12 +26,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <span class="navbar-brand">TANNAT Bookstore</span>
             <a class="navbar-brand" href="{{ path('book_show') }}">TANNAT Bookstore</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Book</a></li>
-                {#<li><a href="{{ path('list_category') }}">Add Todo</a></li>#}
+                <li class="active"><a href="{{ path('book_show') }}">Book</a></li>
                 <li><a href="{{ path('list_category') }}">Category</a></li>
                 <li><a href="">Author</a></li>
             </ul>
@@ -53,7 +53,6 @@
     </div>
 </div><!-- /.container -->
 
-{% block javascripts %}{% endblock %}
 
 </body>
 </html>
