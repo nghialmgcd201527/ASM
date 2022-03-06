@@ -4,6 +4,8 @@ namespace App\Controller;
 use App\Entity\Author;
 use App\Form\AuthorType;
 use App\Repository\AuthorRepository;
+use App\Entity\Book;
+use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,9 +34,9 @@ class AuthorController extends AbstractController
         ]);
     }
     /**
-     * @Route("/author/author_create", name="author_create", methods={"GET","POST"})
+     * @Route("/author_create", name="author_create", methods={"GET","POST"})
      */
-    public function authorCreate(Request $request, EntityManagerInterface $entityManager): Response
+    public function CreateAuthor(Request $request, EntityManagerInterface $entityManager): Response
     {
         $author = new Author();
         $form = $this->createForm(AuthorType::class, $author);
@@ -55,19 +57,24 @@ class AuthorController extends AbstractController
     /**
      * @Route("/author/author_delete/{id}", name="author_delete")
      */
-    public function deleteAuthorById($id)
+    public function deleteAuthorById($id, BookRepository $bookRepository)
     {
         $em = $this->getDoctrine()->getManager();
         $authorRepo = $em->getRepository(Author::class);
-        $author = $authorRepo->find($id);
-        $em->remove($author);
-        $em->flush();
-
-        $this->addFlash(
-            'error',
-            'Todo deleted'
-        );
-
+        $bookRepo = $bookRepository->findOneBy(['author_id'=>$id]);
+        if(!$bookRepo){
+            $author = $authorRepo->find($id);
+            try{
+                dump($author);
+                $em->remove($author);
+                $em->flush();
+            }catch(Exception $ex){
+                $this->addFlash(
+                    'error',
+                    'Todo deleted'
+                );
+            }
+        }
         return $this->redirectToRoute('author_show');
 
     }
