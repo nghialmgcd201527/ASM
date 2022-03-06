@@ -127,4 +127,29 @@ class BookController extends AbstractController
         return new JsonResponse($result, 200, []);
     }
 
+    /**
+     * @Route("/search_book", name="search_book")
+     */
+    public function searchBook(BookRepository $bookRepository): Response
+    {
+        return $this->render('book/search_book.html');
+    }
+
+    /**
+     * @Route("/api/books/{id}", methods={"GET"}, name="api_get_books_by_id")
+     */
+    public function getBooksById($id): JsonResponse
+    {
+        // Call Entity Manager
+        $em = $this->getDoctrine()->getManager();
+
+        // Call Car Repo
+        $bookRepo = $em->getRepository(Book::class);
+
+        // Get car by id
+        $result = $bookRepo->find($id);
+
+        // Return a json response
+        return new JsonResponse($result, 200, []);
+    }
 }
