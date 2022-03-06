@@ -11,6 +11,10 @@
                 <h1 class="mt-4 mt-md-0">{{ book.book_name }}</h1>
                 <hr>
                 <b>Description: </b>{{ book.description }}
+                <hr>
+                <b>Category: </b>{{ book.category_id }}
+                <hr>
+                <b>Author: </b>{{ book.author_id }}
                 <form class="mt-4 p-4 bg-light" method="post">
                 {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('book_edit', {'id':book.id}) }}" class="btn" style="background-color: yellow; color: black">Edit details</a>

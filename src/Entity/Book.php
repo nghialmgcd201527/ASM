@@ -15,7 +15,7 @@ class Book
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    public $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -25,19 +25,19 @@ class Book
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $description;
+    public $description;
 
     /**
      * @ORM\ManyToOne(targetEntity=CategoryBook::class, inversedBy="relation")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $category_id;
+    public $category_id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="relation")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $author_id;
+    public $author_id;
 
     public function getId(): ?int
     {

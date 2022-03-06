@@ -8,6 +8,7 @@ use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -108,5 +109,22 @@ class BookController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/api/books", methods={"GET"}, name="api_get_books")
+     */
+    public function getCars(): JsonResponse
+    {
+        // Call Entity Manager
+        $em = $this->getDoctrine()->getManager();
+
+        // Call Car Repo
+        $bookRepo = $em->getRepository(Book::class);
+
+        // Get all cars
+        $result = $bookRepo->findAll();
+
+        // Return a json response
+        return new JsonResponse($result, 200, []);
+    }
 
 }
