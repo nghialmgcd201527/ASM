@@ -7,6 +7,8 @@
             {% for author in authors %}
                 <div class="col-md-4">
                     <div class="card mb-4">
+                        <img src="{{ author.image }}" alt="{{ author.full_name }}" class="card-img-top" style="width: 200px;
+                                                                                          margin-left: 74px;">
                         <div class="card-body">
                             <h5 class="card-title">{{ author.full_name }}</h5>
                             <div class="d-flex justify-content-between align-item-center">

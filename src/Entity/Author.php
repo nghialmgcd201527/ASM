@@ -34,6 +34,12 @@ class Author
      */
     public $gender;
 
+
+    /**
+     * @ORM\Column(type="string", length=1000)
+     */
+    public $image;
+
     /**
      * @ORM\OneToMany(targetEntity=Book::class, mappedBy="author_id")
      */
@@ -118,5 +124,11 @@ class Author
     public function __toString(): string
     {
         return $this->getFullName();  // or some string field in your Vegetal Entity
+    }
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }
