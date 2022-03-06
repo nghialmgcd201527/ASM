@@ -39,6 +39,11 @@ class Book
      */
     public $author_id;
 
+    /**
+     * @ORM\Column(type="string", length=1000)
+     */
+    public $image;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -88,6 +93,18 @@ class Book
     public function setAuthorId(?Author $author_id): self
     {
         $this->author_id = $author_id;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
