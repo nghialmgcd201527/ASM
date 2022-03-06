@@ -132,7 +132,7 @@ class BookController extends AbstractController
      */
     public function searchBook(BookRepository $bookRepository): Response
     {
-        return $this->render('book/search_book.html');
+        return $this->render('search_book.html');
     }
 
     /**
