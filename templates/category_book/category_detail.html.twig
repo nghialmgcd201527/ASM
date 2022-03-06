@@ -10,9 +10,11 @@
             <div class="col-md-8">
                 <h1 class="mt-4 mt-md-0">{{ category.category_name }}</h1>
                 <hr>
+                {% if is_granted('ROLE_ADMIN') %}
                 <form class="mt-4 p-4 bg-light" method="post">
-                    <a href="{{ path('category_edit', {'id':category.id}) }}" class="btn" style="background-color: red; color: white">Edit detail</a>
+                    <a href="{{ path('category_edit', {'id':category.id}) }}" class="btn" style="background-color: yellow; color: black">Edit detail</a>
                 </form>
+                {% endif %}
             </div>
         </div>
     </div>

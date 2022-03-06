@@ -6,7 +6,9 @@ use App\Entity\Book;
 use App\Form\BookType;
 use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,6 +21,16 @@ class BookController extends AbstractController
     public function show(BookRepository $bookRepository): Response
     {
         return $this->render('book/index.html.twig', [
+            'books' => $bookRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/welcome", name="welcome")
+     */
+    public function welcome(BookRepository $bookRepository): Response
+    {
+        return $this->render('book/index_customer.html.twig', [
             'books' => $bookRepository->findAll(),
         ]);
     }
@@ -78,6 +90,7 @@ class BookController extends AbstractController
 
     /**
      * @Route("/book/edit/{id}", name="book_edit")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function editBook(Request $request, Book $book, EntityManagerInterface $entityManager): Response
     {
@@ -96,5 +109,22 @@ class BookController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/api/books", methods={"GET"}, name="api_get_books")
+     */
+    public function getCars(): JsonResponse
+    {
+        // Call Entity Manager
+        $em = $this->getDoctrine()->getManager();
+
+        // Call Car Repo
+        $bookRepo = $em->getRepository(Book::class);
+
+        // Get all cars
+        $result = $bookRepo->findAll();
+
+        // Return a json response
+        return new JsonResponse($result, 200, []);
+    }
 
 }

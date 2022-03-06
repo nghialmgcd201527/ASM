@@ -15,7 +15,7 @@ class Book
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    public $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -25,19 +25,24 @@ class Book
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $description;
+    public $description;
 
     /**
      * @ORM\ManyToOne(targetEntity=CategoryBook::class, inversedBy="relation")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $category_id;
+    public $category_id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="relation")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $author_id;
+    public $author_id;
+
+    /**
+     * @ORM\Column(type="string", length=1000)
+     */
+    public $image;
 
     public function getId(): ?int
     {
@@ -88,6 +93,18 @@ class Book
     public function setAuthorId(?Author $author_id): self
     {
         $this->author_id = $author_id;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

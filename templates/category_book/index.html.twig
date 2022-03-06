@@ -11,12 +11,15 @@
                             <h5 class="card-title">{{ category.category_name }}</h5>
                             <div class="d-flex justify-content-between align-item-center">
                                 <a href="{{ path('category_detail', {'id':category.id}) }}" class="btn btn-dark">View details</a>
+                                {% if is_granted('ROLE_ADMIN') %}
                                 <a href="{{ path('category_delete', {'id':category.id}) }}" class="btn" style="background-color: red; color: white">Delete</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
             {% endfor %}
+            {% if is_granted('ROLE_ADMIN') %}
             <div class="col-md-4">
                 <div class="card mb-4">
                     <div class="card-body">
@@ -26,6 +29,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

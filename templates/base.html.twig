@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}TANNAT Bookstore{% endblock %}</title>
     {% block stylesheets %}
+        <link href="./assets/styles/app.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
               integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
               crossorigin="anonymous">
@@ -13,9 +14,7 @@
 <body>
 {% block header %}
 <nav class="navbar navbar-dark bg-dark sticky-top">
-    <a href="{{ path('book_show') }}" class="navbar-brand">
-        TAN LIBRARY
-    </a>
+    <span class="navbar-brand">TANNAT Bookstore </span>
 
     {% if app.user %}
         <a href="{{ path('book_show') }}" class="navbar-brand">
@@ -24,12 +23,17 @@
         <a href="{{ path('list_category') }}" class="navbar-brand">
             Category list
         </a>
-        <a href="{{ path('list_category') }}" class="navbar-brand">
-            About Us
+        <a href="{{ path('author_show') }}" class="navbar-brand">
+                    Author
         </a>
-        <a href="{{ path('list_category') }}" class="navbar-brand">
-            Contact Us
+        <a href="{{ path('aboutus') }}" class="navbar-brand">
+                    About Us
         </a>
+        {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('account') }}" class="navbar-brand">
+            Customer
+        </a>
+        {% endif %}
         <a class="nav-link" href="{{ path('user show', {'id':app.user.id}) }}">
         Your Profile
         </a>

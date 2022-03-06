@@ -19,6 +19,7 @@ class BookType extends AbstractType
             ->add('description')
             ->add('category_id')
             ->add('author_id')
+            ->add('image')
         ;
     }
 

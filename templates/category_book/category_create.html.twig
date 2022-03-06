@@ -1,9 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 {% block body %}
     {{ form_start(form) }}
     <div class="form-group">
-        <label for="category_name">Name:</label>
-        {{ form_widget(form.category_name) }}
+        <label for="name">Category New:</label>
+        {{ form_widget(form.category_name,{
+            'attr':{
+                'class':'form-control',
+                'placeholder': 'Category Name'
+            }
+        }) }}
     </div>
     <input type="submit" name="create_category" value="Create" class="btn btn-primary"/>
     {{ form_end(form) }}
